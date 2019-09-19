@@ -1,0 +1,48 @@
+﻿@model IEnumerable<BlackBooksApp.Models.Type>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Типы</h2>
+
+<p style="float:left;">
+    @Html.ActionLink("Новый тип", "Create")
+</p>
+
+@using (Html.BeginForm())
+{
+    <p style="float:right;">
+        Найти по категории: @Html.TextBox("SearchString")
+        <input type="submit" value="Поиск" />
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Категория", "Index", new { sortOrder = ViewBag.CategorySortParm })
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.ActionLink("Изменить", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Подробнее", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+        </td>
+    </tr>
+}
+
+</table>
